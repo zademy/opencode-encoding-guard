@@ -1,0 +1,56 @@
+{
+  "name": "opencode-encoding-guard",
+  "version": "0.1.0",
+  "description": "OpenCode V2 plugin that preserves the original text encoding (ISO-8859-1, Windows-1252, UTF-8, UTF-8 BOM), line endings and BOM when agents edit, write or patch files.",
+  "license": "MIT",
+  "type": "module",
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "encoding",
+    "charset",
+    "iso-8859-1",
+    "latin1",
+    "windows-1252",
+    "eclipse",
+    "legacy",
+    "java",
+    "mojibake"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "bun run build:types && bun run build:bundle",
+    "build:types": "tsc -p tsconfig.build.json",
+    "build:bundle": "bun build ./src/index.ts --target=bun --outfile=./dist/index.js --minify --external @opencode/plugin",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test",
+    "check": "bun run typecheck && bun run test"
+  },
+  "dependencies": {
+    "iconv-lite": "^0.7.3",
+  },
+  "devDependencies": {
+    "@opencode/plugin": "2.0.22",
+    "@types/bun": "^1.4.0",
+    "typescript": "^5.8.2"
+  },
+  "engines": {
+    "bun": ">=1.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
